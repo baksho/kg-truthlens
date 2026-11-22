@@ -15,9 +15,10 @@ It compares four retrieval strategies on the same questions:
 Answers are structured JSON (`answer`, `citations`, `abstain`, `note`). **Measured** and
 **predicted** drug responses are separate evidence types and are labelled in every evidence line.
 
+<!--
 ## Status: what is and is not verified
 
-[//]: #- Verified (31 unit tests, offline): SPARQL guard, entity linking, all four retrievers, answer
+- Verified (31 unit tests, offline): SPARQL guard, entity linking, all four retrievers, answer
   parsing, metrics, benchmark generation, eval CLI, API.
 - **Not run on real data.** The authoring environment could not download GDSC2 and the unit
   tests use a tiny hand-built placeholder graph (`tests/conftest.py`). No result in this repo
@@ -28,6 +29,7 @@ Answers are structured JSON (`answer`, `citations`, `abstain`, `note`). **Measur
   `scripts/load_graphdb.py` are written from the documented interfaces; verify them.
 - Default entity-linking threshold (0.85) is an untuned guess. Tune it with the
   `linking_recall` metric on your real KG.
+-->
 
 ## Quick start
 
