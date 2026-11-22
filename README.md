@@ -17,7 +17,7 @@ Answers are structured JSON (`answer`, `citations`, `abstain`, `note`). **Measur
 
 ## Status: what is and is not verified
 
-- Verified (31 unit tests, offline): SPARQL guard, entity linking, all four retrievers, answer
+[//]: #- Verified (31 unit tests, offline): SPARQL guard, entity linking, all four retrievers, answer
   parsing, metrics, benchmark generation, eval CLI, API.
 - **Not run on real data.** The authoring environment could not download GDSC2 and the unit
   tests use a tiny hand-built placeholder graph (`tests/conftest.py`). No result in this repo
