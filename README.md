@@ -1,4 +1,4 @@
-# graphrag-pharmaco
+# kg-truthlens
 
 GraphRAG over a pharmacogenomics knowledge graph, with an evaluation harness that measures
 whether answers stay grounded in the graph.
