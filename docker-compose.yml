@@ -1,0 +1,32 @@
+# UNTESTED in the environment this repo was written in (no Docker daemon was available).
+# Set GRAPHDB_IMAGE to a GraphDB image you have access to, e.g. from your own registry or
+# Docker Hub; check the current image name/tag and licence terms yourself, none is hard-coded.
+services:
+  graphdb:
+    image: ${GRAPHDB_IMAGE:?set GRAPHDB_IMAGE}
+    ports:
+      - "7200:7200"
+    volumes:
+      - graphdb-data:/opt/graphdb/home
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:7200/rest/repositories || exit 1"]
+      interval: 10s
+      retries: 12
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      GRAPHRAG_KG_BACKEND: http
+      GRAPHRAG_SPARQL_ENDPOINT: http://graphdb:7200/repositories/${GRAPHDB_REPO:-pharmaco}
+      GRAPHRAG_LLM_PROVIDER: ${GRAPHRAG_LLM_PROVIDER:-anthropic}
+      GRAPHRAG_LLM_MODEL: ${GRAPHRAG_LLM_MODEL:?set GRAPHRAG_LLM_MODEL}
+      GRAPHRAG_LLM_BASE_URL: ${GRAPHRAG_LLM_BASE_URL:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    depends_on:
+      graphdb:
+        condition: service_healthy
+
+volumes:
+  graphdb-data:

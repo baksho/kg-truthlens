@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graphrag-pharmaco"
+version = "0.1.0"
+description = "GraphRAG over a pharmacogenomics knowledge graph, with a grounding/hallucination evaluation harness"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+  "rdflib>=7",
+  "httpx>=0.27",
+  "scikit-learn>=1.3",
+  "fastapi>=0.110",
+  "uvicorn>=0.27",
+  "pydantic>=2",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]  # long SPARQL strings
